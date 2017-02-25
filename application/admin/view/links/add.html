@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="__PUBLIC__/style/pintuer.css">
+<link rel="stylesheet" href="__PUBLIC__/style/admin.css">
+<script src="__PUBLIC__/style/jquery.js"></script>
+<script src="__PUBLIC__/style/pintuer.js"></script>
+</head>
+<body >
+<div class="panel admin-panel margin-top" >
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>修改链接</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x"  action="__ROOT__/links/addlink">        
+      <div class="form-group">
+        <div class="label">
+          <label>链接名称：</label>
+        </div>
+        <div class="field" id="hgy">
+          <input type="text" class="input w50" name="title" />
+          <div class="tips"></div>
+        </div>
+         </div>  
+      <div class="form-group">
+        <div class="label">
+          <label>链接地址</label>
+        </div>
+       <div class="field" id="hgy">
+          <input type="text" class="input w50" name="url"  />
+          <div class="tips"></div>
+      </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>描述信息</label>
+        </div>
+        
+           
+        <div class="field" id="hgy">
+          <input type="text" class="input w50" name="desc"  />
+          <div class="tips"></div>
+        </div>
+      
+     
+      
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="submit" style="margin-left: 14%"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body></html>
+ 

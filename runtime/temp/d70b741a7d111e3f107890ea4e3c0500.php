@@ -1,0 +1,172 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:59:"E:\WWW\blog\public/../application/admin\view\add\index.html";i:1483607747;}*/ ?>
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="__PUBLIC__/style/pintuer.css">
+<link rel="stylesheet" href="__PUBLIC__/style/admin.css">
+<script src="__PUBLIC__/style/jquery.js"></script>
+<script src="__PUBLIC__/style/pintuer.js"></script>
+<script src ="__PUBLIC__/../KindEditor/kindeditor.js"></script>
+
+	<script type="text/javascript">
+	  var editor;
+	  KindEditor.ready(function(e){
+		  editor = e.create("[name=content]",{
+			  width:"700px",
+			  height:"500px"
+		  });
+	  });
+</script>
+
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="__ROOT__/add/insertarc" enctype="multipart/form-data" >  
+      <div class="form-group">
+        <div class="label">
+          <label>标题：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="title" data-validate="required:请输入标题" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>图片：</label>
+        </div>
+        
+		<input type="file" name="image[]" multiple="multiple"/> <br>
+		
+        
+      </div>     
+      
+      <if condition="$iscid eq 1">
+        <div class="form-group">
+          <div class="label">
+            <label>分类标题：</label>
+          </div>
+          <div class="field">
+           <ul class="search" style="padding-left:10px;">
+           <li>
+           <select name="s_istop" id="s_istop" class="input" style="width:160px; line-height:17px;display:inline-block">
+            
+            <option value="0">一级分类</option>
+            <option value="1">二级分类</option>
+             <option value="2">三级分类</option>            
+          </select>
+        </li>
+        <if condition="$iscid eq 1">
+        <li>分类名称</li>
+          <li id='level'>
+            <select name="cid"  class="input" style="width:200px; line-height:17px;"  id="ciwed">
+            
+              <?php foreach($type as $v): ?>
+              <option value="<?php echo $v['id']; ?>"><?php echo $v['typetitle']; ?></option>
+              <?php endforeach; ?>         
+              
+             
+            </select>
+            </li>
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>标签：</label>
+          </div>
+          <div class="field" style="padding-top:8px;"> 
+           
+            推荐 <input id="isvouch" value="1" name="wed1" type="checkbox" />
+            置顶 <input id="istop" value="2" name="wed1" type="checkbox" /> 
+         
+          </div>
+        </div>
+      </if>
+      
+      <div class="form-group">
+        <div class="label">
+          <label>内容：</label>
+        </div>
+        <div class="field">
+          <textarea name="content" data-validate="required:请输入内容"class="input" style="height:450px; border:1px solid #ddd;"></textarea>
+          <div class="tips"></div>
+        </div>
+      </div>
+     
+     
+      
+      <div class="form-group">
+        <div class="label">
+          <label>发布时间：</label>
+        </div>
+        <div class="field"> 
+          <script src="__PUBLIC__/style/laydate/laydate.js"></script>
+          <input type="date" class="laydate-icon input w50" name="datetime"  value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>作者：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" name="authour" value=""  />
+          <div class="tips"></div>
+        </div>
+      </div>
+     <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body></html>
+ <script>
+          $(function(){
+            $('#s_istop').change(function(){
+              // var level = this.value;
+              $.ajax({
+                url:'__ROOT__/Cate/ajx',
+                type:'post',
+                data:JSON.stringify({'level':this.value}),
+                dataType:"JSON",
+                success:function(data){
+                    //$("#level").html(data);
+                    // var level = dcoument.getElementById('level');
+                    // alert(level);
+                   var obj= eval(data);
+                   var jboj="<select name='cid'  class='input' style='width:200px; line-height:17px;'id='ciwed' >";
+                   var jbo;
+                   for (var i = obj.length - 1; i >= 0; i--) {
+                       
+                       
+                       jbo +="<option value='"+obj[i]['id']+"'>"+obj[i]['typetitle']+"</option>";
+                       
+                       //alert(jbo);
+
+                   };
+                   var qsw="</select>";
+                   var wsxc=jboj+jbo+qsw;
+                   //alert(wsxc);
+                   $("#level").html(wsxc);
+                }
+              });
+                
+            });
+})
+
+</script>

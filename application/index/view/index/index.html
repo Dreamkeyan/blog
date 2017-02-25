@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>{$website.stitle}</title>
+<meta name="keywords" content="{$website.stitle}" />
+<meta name="description" content="" />
+<link rel="stylesheet" href="__PUBLIC__/style/index.css"/>
+<link rel="stylesheet" href="__PUBLIC__/style/style.css"/>
+<script type="text/javascript" src="__PUBLIC__/style/jquery1.42.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/style/jquery.SuperSlide.2.1.1.js"></script>
+<!--[if lt IE 9]>
+<script src="js/html5.js"></script>
+<![endif]-->
+</head>
+
+<body>
+    <!--header start-->
+    {include file="common/header"}
+       <!--nav end-->
+    <!--content start-->
+    <div id="content">
+         <!--left-->
+         <div class="left" id="c_left">
+           <div class="s_tuijian">
+           <h2>文章<span>推荐</span></h2>
+           </div>
+          <div class="content_text">
+             {foreach $articles as $value}
+           <div class="wz">
+            <h3><a href="__ROOT__/news/index/[id/{$value.id}]" title="{$value.title}">{$value.title}</a></h3>
+             <dl>
+               <dt><img src="__PUBLIC__/images/article/{$value.pic}" width="200"  height="123" alt=""></dt>
+               <dd>
+                 <p class="dd_text_1">{$value.content|strip_tags|mb_substr=0,165,'utf-8'}.....</p>
+               <p class="dd_text_2">
+               <span class="left author">{$value.author}</span><span class="left sj">时间:{$value.time|date="Y-m-d",###}</span>
+               <span class="left fl">分类:<a href="#" title="{$value.typetitle}">{$value.typetitle}</a></span><span class="left yd"><a href="__ROOT__/news/index/[id/{$value.id}]" title="阅读全文">阅读全文</a>
+               </span>
+                <div class="clear"></div>
+               </p>
+               </dd>
+               <div class="clear"></div>
+             </dl>
+            </div>
+            {/foreach}
+           <!--wz end-->
+           
+           <!--wz end-->
+              
+        <div class="pagelist" >{$articles->render()}
+        <style>
+li {
+   
+    float: left;}
+         .pagelist {padding:10px 0; text-align:center;}
+.pagelist span,.pagelist a{ border-radius:3px; border:1px solid #dfdfdf;display:inline-block; padding:5px 12px;}
+.pagelist a{ margin:0 3px;}
+.pagelist span.current{ background:#09F; color:#999; border-color:#09F; margin:0 2px;}
+.pagelist a:hover{background:#09F; color:#FFF; border-color:#09F; }
+.pagelist label{ padding-left:15px; color:#999;}
+.pagelist label b{color:red; font-weight:normal; margin:0 3px;}
+
+
+ </style>
+        </div>
+           </div>
+
+         </div>
+
+         <!--left end-->
+         <!--right-->
+         {include file="common/right"}
+           <!--end-->
+           
+           <div class="link">
+            <h2>友情链接</h2>
+            {foreach $links as $value}
+            <p><a href="{$value.url}">{$value.title}</a></p>
+               {/foreach}
+           </div>
+        
+         </div>
+         <!--right end-->
+         <div class="clear"></div>
+    </div>
+    <!--content end-->
+    <!--footer start-->
+    {include file="common/foot"}
+    <!--footer end-->
+    <script type="text/javascript">jQuery(".lanmubox").slide({easing:"easeOutBounce",delayTime:400});</script>
+    <script  type="text/javascript" src="__PUBLIC__/style/nav.js"></script>
+}
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>留言板-个人博客</title>
+<meta name="keywords" content="个人博客" />
+<meta name="description" content="" />
+<link rel="stylesheet" href="__PUBLIC__/style/index.css"/>
+
+<link rel="stylesheet" href="__PUBLIC__/style/style.css"/>
+
+<script type="text/javascript" src="__PUBLIC__/style/jquery1.42.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/style/jquery.SuperSlide.2.1.1.js"></script>
+<!--[if lt IE 9]>
+
+<script src="js/html5.js"></script>
+<![endif]-->
+<style type="text/css">
+div,h2,h3,ul,li,p{margin:0;padding:0;}
+a{text-decoration:none;}
+a:hover{text-decoration:underline;}
+ul{list-style-type:none;}
+
+#msgBox{width:500px;background:#fff;border-radius:5px;margin:10px auto;padding-top:10px;}
+#msgBox form h2{font-weight:400;font:400 18px/1.5 \5fae\8f6f\96c5\9ed1;}
+#msgBox form{background:url(__PUBLIC__/images/boxBG.jpg) repeat-x 0 bottom;padding:0 20px 15px;}
+#userName,#conBox{color:#777;border:1px solid #d0d0d0;border-radius:6px;background:#fff url(__PUBLIC__/images/inputBG.png) repeat-x;padding:3px 5px;font:14px/1.5 arial;}
+#userName.active,#conBox.active{border:1px solid #7abb2c;}
+#userName{height:20px;}
+#conBox{width:700px;resize:none;height:65px;overflow:auto;}
+#msgBox form div{position:relative;color:#999;margin-top:10px;}
+#msgBox img{border-radius:3px;}
+#face{position:absolute;top:0;left:172px;}
+#face img{width:30px;height:30px;cursor:pointer;margin-right:6px;opacity:0.5;filter:alpha(opacity=50);}
+#face img.hover,#face img.current{width:28px;height:28px;border:1px solid #f60;opacity:1;filter:alpha(opacity=100);}
+#sendBtn{border:0;width:80px;height:30px;cursor:pointer;margin-left:10px;background:url(__PUBLIC__/images/publishing-enabled.png) no-repeat;}
+#sendBtn.hover{background-position:0 -30px;}
+#msgBox form .maxNum{font:26px/30px Georgia, Tahoma, Arial;padding:0 5px;}
+
+.tr{overflow:hidden;zoom:1;}
+.tr p{float:right;line-height:30px;}
+.tr *{float:left;}
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+
+<body>
+      <!--header start-->
+    
+     <!--header end-->
+    {include file="common/header"}
+       <!--nav end-->
+    <!--content start-->
+    <div id="content">
+       <!--left-->
+         <div class="left" id="guestbook">
+           <div class="weizi">
+           <div class="wz_text">当前位置：<a href="#">首页</a>><h1>留言板</h1></div>
+           </div>
+           <div class="g_content">
+          <!-- 用户留言区域 -->
+          <form>
+    <div><textarea id="conBox" class="f-text" oninput ="cgebn()"></textarea></div>
+        <div class="tr">
+            <p>
+                <span id="countTxt" class="countTxt">还能输入</span><strong id="maxNum" class="maxNum" style="font:26px/30px Georgia, Tahoma, Arial;padding:0 5px;">512</strong><span>个字</span>
+
+                <input id="sendBtn" type="bottom" onclick="return sub()" value="" title="快捷键 Ctrl+Enter" />
+            </p>
+        </div>
+        </form>
+        <div class="list" >
+        <h3 style="    position: relative;
+    height: 33px;
+    font-size: 14px;
+    font-weight: 400;
+    background: #e3eaec;
+    border: 1px solid #dee4e7;"><span style="position: absolute;
+    left: 6px;
+    top: 6px;
+    background: #fff;
+    line-height: 28px;
+    display: inline-block;
+    padding: 0 15px;"> 大家在说</span></h3>
+        <ul style="width:700px ">
+              {if $leaver neq ""}
+      {foreach $leaver as $value}
+            <li style="    float: left;
+    clear: both;
+    width: 100%;
+    border-bottom: 1px dashed #d8d8d8;
+    padding: 10px 0;
+    background: #fff;
+    overflow: hidden">
+           
+          
+                <div class="userPic" style="float: left; margin-left: 5px;"><img src="__PUBLIC__/images/{$value.portrial}" width="50px" height="50px" /></div>
+                <div class="content" style="float: left; margin-left: 5px;width:90%">
+                    <div class="userName" style="float: left; margin-left: 5px;"><a href="javascript:;">{$value.username}</a>:</div>
+                    <div class="msgInfo"  margin-left: 5px;">{$value.centent}</div>
+                    <div class="times"><span>{$value.leaverdate|date="Y-m-d h-i-s",###}</span>
+                    <a  style="text-align: right;float: right ;margin-bottom: 0px;" class="del" href="javascript:dele({$value.id});">删除</a>
+                     <a  style="text-align: right;float: right ;margin-bottom: 0px;" class="del" href="javascript:huifu({$value.id})">回复</a>
+
+                    </div>
+                    
+                </div>
+
+            </li>
+            <li name="{$value.id}" style="display: none"> 
+            <form>
+    <div><textarea id="conBox" name="conBox{$value.id}" class="f-text" oninput ="cgebn()"></textarea></div>
+        <div class="tr">
+            <p>
+                <span id="countTxt" class="countTxt">还能输入</span><strong id="maxNum" class="maxNum" style="font:26px/30px Georgia, Tahoma, Arial;padding:0 5px;">512</strong><span>个字</span>
+
+                <input id="sendBtn" type="bottom" onclick="return subz({$value.id})" value="" title="快捷键 Ctrl+Enter" />
+            </p>
+        </div>
+        </form></li>
+            {/foreach}
+            {else /}
+            {/if}
+             <li>{$list->render()}</li>
+            </ul></div>
+      <!-- 用户发布留言区域结束 -->
+           </div>
+         </div>
+         <!--end left -->
+         <!--right-->
+        {include file="common/right"}</div>
+         <!--end  right-->
+         <div class="clear"></div>
+         
+    </div>
+    <!--content end-->
+    <!--footer-->
+   {include file="common/foot"}
+    <!--footer end-->
+    <script type="text/javascript">jQuery(".lanmubox").slide({easing:"easeOutBounce",delayTime:400});</script>
+    <script  type="text/javascript" src="__PUBLIC__/style/nav.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+
+
+function  cgebn(){
+ // $("#conBox").value.length;
+//alert($("#conBox").val().length);
+var iLen = 0;
+var oMaxNum = $("#maxNum");
+var oCountTxt = $("#countTxt");
+    var maxNum = 512;
+    var mxs= maxNum - $("#conBox").val().length;
+   // alert(mxs);
+    if( mxs<0){
+    mxs="<font style='color:red;'>"+mxs+"</font>"
+   }
+    oMaxNum.html(mxs);
+}
+function sub(){
+  if(confirm("请确认是否发布评论？")){
+   var sd= $('#conBox').val();
+   //alert($('#conBox').val());
+   window.location="__ROOT__/guestbook/sub/[content/"+sd+"]";
+  }
+
+}
+function huifu(leaverid){
+    var sps= $("[name="+leaverid+"]");
+    //alert(sps);
+    if (sps.css("display") == "none" ) {
+      sps.css("display","block");
+    }else{
+      sps.css("display","none");
+    }
+}
+function subz(leaverid){
+  if(confirm("请确认是否发布评论？")){
+    alert('#conBox'+leaverid);
+    $he='conBox'+leaverid;
+   var sd= $("[name=conBox"+leaverid+"]").val();
+   alert(sd);
+   window.location="__ROOT__/guestbook/subz/[leaverid/"+leaverid+"/content/"+sd+"]";
+  }
+
+}
+
+function dele(leaverid){
+   if(confirm("请确认是否删除评论与回复？")){
+   // alert('#conBox'+reviewid);
+   // $he='conBox'+reviewid;
+   //var sd= $("[name=conBox"+reviewid+"]").val();
+   //alert(sd);
+   window.location="__ROOT__/guestbook/dele/[id/"+leaverid+"]";
+  }
+}
+</script>

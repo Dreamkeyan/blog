@@ -1,0 +1,51 @@
+  <div class="right" id="c_right">
+          <div class="s_about">
+          <h2>关于博主</h2>
+           <img src="__PUBLIC__/images/{$website.slogo}" width="230" height="230" alt="博主"/>
+           <p>博主：{$website.s_name}</p>
+           <p>职业：{$website.s_fax}</p>
+           <p>简介：{$website.email}</p>
+           <p>
+           <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$website.QQ}&site=qq&menu=yes"><span class="left "><img border="0" src="http://wpa.qq.com/pa?p=2:{$website.QQ}:41" alt="联系博主" title="联系博主"/></a></span><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=b2d92794c5954640bb3858e83fa68d60bcfcb87db557ba1cf135468636dcb137"><span class="left "><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="紫云阁" title="紫云阁"></span></a>
+           <div class="clear"></div>
+           </p>
+          </div>
+          <!--栏目分类-->
+           <div class="lanmubox">
+              <div class="hd">
+               <ul><li>精心推荐</li><li>最新文章</li><li class="hd_3">随机文章</li></ul>
+              </div>
+              <div class="bd">
+                <ul>
+                {foreach $rese as $value}
+          <li><a href="__ROOT__/news/index/[id/{$value.id}]" title="{$value.title}">{$value.title|mb_substr=0,12,'utf-8'}...</a></li>
+          <!-- <li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
+          <li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
+          <li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
+          <li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li> -->
+          {/foreach}
+        </ul>
+                 <ul>
+              {foreach $rece as $value}
+          <li><a href="__ROOT__/news/index/[id/{$value.id}]" title="{$value.title}">{$value.title|mb_substr=0,12,'utf-8'}...</a></li>
+          <!-- <li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
+          <li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
+          <li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
+          <li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li> -->
+          {/foreach}
+        </ul>
+                 <ul>
+               {foreach $reee as $value}
+          <li><a href="__ROOT__/news/index/[id/{$value.id}]" title="{$value.title}">{$value.title|mb_substr=0,12,'utf-8'}...</a></li>
+          <!-- <li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
+          <li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
+          <li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
+          <li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li> -->
+          {/foreach}
+        </ul>
+                 
+                
+              </div>
+           </div>
+           <!--end-->
+      
